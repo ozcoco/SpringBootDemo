@@ -8,6 +8,10 @@ public enum ServiceManager implements IServiceManager {
 
             return UserService.INSTANCE;
         }
+    };
+
+    public static ServiceManager getInstance() {
+        return INSTANCE;
     }
 
 }
