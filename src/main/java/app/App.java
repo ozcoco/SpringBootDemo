@@ -10,9 +10,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        ServiceManager.INSTANCE.getUserService().test();
-
-//        SpringApplication.run(App.class, args);
+        SpringApplication.run(App.class, args);
 
     }
 

@@ -3,6 +3,7 @@ package app.controller;
 
 import app.po.Message;
 import app.po.User;
+import app.service.ServiceManager;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,8 @@ public class UserController {
 
     @RequestMapping("/{userId}")
     public User getUser(@PathVariable(value = "userId", required = false) Integer userId) {
+
+        ServiceManager.INSTANCE.getUserService().test();
 
         final User user = User.newInstance();
 
