@@ -18,7 +18,11 @@ public class UserController {
     @RequestMapping("/{userId}")
     public User getUser(@PathVariable(value = "userId", required = false) Integer userId) {
 
+<<<<<<< HEAD
         ServiceManager.INSTANCE.getUserService().test();
+=======
+        ServiceManager.getInstance().getUserService().test();
+>>>>>>> 3addb080cff1c7dec0be358dc84368105f4d9030
 
         final User user = User.newInstance();
 
