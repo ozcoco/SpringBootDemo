@@ -28,7 +28,7 @@ public class Message implements Serializable, Cloneable {
 
     }
 
-    public static Message newInstance() {
+    public static Message INSTANCE() {
 
         return new Message();
     }
