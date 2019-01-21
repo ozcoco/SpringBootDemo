@@ -1,6 +1,6 @@
 package app.po;
 
-public class User extends BaseBean {
+public class User {
 
     private int userId;
 

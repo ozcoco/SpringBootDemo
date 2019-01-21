@@ -6,7 +6,6 @@ import app.po.User;
 import app.vo.UserVo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -19,7 +18,9 @@ import java.util.Random;
 public class UserController {
 
     @RequestMapping("/{userId}")
-    public User getUser(@PathVariable(value = "userId", required = false) Integer userId) {
+    public Message<User> getUser(@PathVariable(value = "userId", required = false) Integer userId) {
+
+        final Message<User> msg = new Message<>();
 
         final User user = User.newInstance();
 
@@ -35,18 +36,17 @@ public class UserController {
 
             user.setName("zero");
 
-            return user;
+            msg.setData(user);
 
         } else {
 
-            user.setCode(Message.FAIL_PARAM_NULL);
+            msg.setCode(Message.FAIL_PARAM_NULL);
 
-            user.setMsg("userId不能为空！！！");
+            msg.setMsg("userId不能为空！！！");
 
-            return user;
         }
 
-
+        return msg;
     }
 
 
@@ -88,6 +88,48 @@ public class UserController {
         vo.users = userList;
 
         return vo;
+
+    }
+
+
+    @RequestMapping("list2/{page}")
+    public Message<List<User>> getUserList2(@PathVariable(value = "page") int page) {
+
+        if (page <= 0) page = 1;
+
+        final Message<List<User>> msg = new Message<>();
+
+        if (page > 10) {
+
+            msg.setCode(0);
+            msg.setMsg("没有更多数据");
+
+            return msg;
+        }
+
+        final List<User> userList = new ArrayList<>();
+
+        for (int i = (page - 1) * 20; i < page * 20; i++) {
+
+            final User user = User.newInstance();
+
+            user.setUserId(new Random().nextInt(Integer.MAX_VALUE));
+
+            user.setAddress("address");
+
+            user.setAge(new Random().nextInt(150));
+
+            user.setGender(new Random().nextInt(2));
+
+            user.setName("user" + (i + 1));
+
+            userList.add(user);
+
+        }
+
+        msg.setData(userList);
+
+        return msg;
 
     }
 

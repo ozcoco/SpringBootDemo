@@ -2,7 +2,7 @@ package app.po;
 
 import java.io.Serializable;
 
-public class Message implements Serializable, Cloneable {
+public class Message<T> implements Serializable, Cloneable {
 
     public final static int OK = 0;
 
@@ -15,23 +15,18 @@ public class Message implements Serializable, Cloneable {
 
     private String msg;
 
-    private byte[] data;
+    private T data;
 
 
     public Message() {
     }
 
-    public Message(int code, String msg, byte[] data) {
+    public Message(int code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
-
     }
 
-    public static Message INSTANCE() {
-
-        return new Message();
-    }
 
     public int getCode() {
         return code;
@@ -49,11 +44,11 @@ public class Message implements Serializable, Cloneable {
         this.msg = msg;
     }
 
-    public byte[] getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(byte[] data) {
+    public void setData(T data) {
         this.data = data;
     }
 
